@@ -2,4 +2,6 @@
 set -euo pipefail
 size=2571.11
 
-echo "scale=18 ; $1 / $size" | bc
+met=$(echo "scale=18 ; $1 / $size" | bc)
+echo $met | xclip -selection clipboard
+echo $met | dmenu
