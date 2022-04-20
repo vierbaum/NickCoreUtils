@@ -21,9 +21,9 @@ int main() {
   // 2b3 - 9abc + 27a²d
   d1 = 2 * b * b * b - 9 * a * b * c + 27 * a * a * d;
 
-  C = cbrt((d1 + sqrt(d1 * d1 - 4 * d0 * d0 * d0))/2);
+  C = cpowf((d1 + csqrt(d1 * d1 - 4 * d0 * d0 * d0))/2, 1.0/3.0);
   if(C == 0)
-    C = cbrt((d1 - sqrt(d1 * d1 - 4 * d0 * d0 * d0))/2);
+    C = cpowf((d1 - csqrt(d1 * d1 - 4 * d0 * d0 * d0))/2, 1.0/3.0);
 
   for(int k = 0; k <= 2; k++) {
     x = -1/(3*a) * (b + cpow(XI, k) * C + d0/(cpow(XI, k) * C));
