@@ -14,7 +14,7 @@ def get_bytes(t, iface='wlp3s0'):
 
 swapram = 1
 while(True):
-    cpu = psutil.cpu_percent(interval=1)
+    logfile = open(os.path.expanduser("~/.cache/statusLog"), "a")
     ram = str(psutil.virtual_memory()[3] / 1000000000)[:4]
     swap = str(psutil.swap_memory()[1] / 1000000)[:4]
     root_dir = psutil.disk_usage('/')[3]
@@ -26,6 +26,7 @@ while(True):
         battery = psutil.sensors_battery()
         bat_perc = str(battery.percent)[:4]
         rx1 = get_bytes('rx')
+        cpu = psutil.cpu_percent(interval=1)
         rx2 = get_bytes('rx')
         rx_speed = round((rx2 - rx1), 4)
         if swapram == 1:
@@ -34,13 +35,18 @@ while(True):
         else:
             swapram = 1
             status = "  :{} |  :{}% | :{} Mb | [h]:{} |  {}% | :{} | {} |  ".format(rx_speed, cpu, swap, home_dir, bat_perc, temp, now)
+        #logfile.write("{},{},{},{},{},{},{}\n".format(cpu, ram, swap, temp, rx_speed, bat_perc, datetime.datetime.now().strftime("%s")))
     except Exception:
+        cpu = psutil.cpu_percent(interval=1)
         if swapram == 1:
             swapram = 0
             status = "   :{}% | :{} Gi | [/]:{} | :{} | {} |  ".format(cpu, ram, root_dir, temp, now)
         else:
             swapram = 1
             status = "   :{}% | :{} Mb | [h]:{} | :{} | {} |  ".format(cpu, swap, home_dir, temp, now)
+        #logfile.write("{},{},{},0,0,{}\n".format(cpu, ram, swap, temp, rx_speed, bat_perc))
+
 
 
     os.system("xsetroot -name '{}'".format(status))
+    logfile.close()
