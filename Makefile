@@ -8,7 +8,7 @@ install:
 	@$(CC) brenfordsLaw.c -o /usr/bin/brenfordsLaw
 	@$(CC) -lm cubic.c -o /usr/bin/cubic
 	@$(CC) -lm quartic.c -o /usr/bin/quartic
-	@$(cc) -linearEquations.c -o /usr/bin/linearEquations
+	@$(cc) math/linearEquations.c -o /usr/bin/linearEquations
 	cp database.sh dmenu.sh saarlandCalculator.sh status.py /usr/bin
 
 
