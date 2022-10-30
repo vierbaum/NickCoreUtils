@@ -20,7 +20,9 @@ while(True):
     root_dir = psutil.disk_usage('/')[3]
     home_dir = psutil.disk_usage('/home')[3]
     temp = psutil.sensors_temperatures().get("coretemp")[0][1]
-    now = datetime.datetime.now().strftime("%d, %X, %s")
+    #now = datetime.datetime.now().strftime("%d, %X, %s")
+    now = datetime.datetime.now().strftime("%d, %X")
+    now2 = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-4))).strftime("%d, %X, %s")
 
     try:
         battery = psutil.sensors_battery()
@@ -31,19 +33,19 @@ while(True):
         rx_speed = round((rx2 - rx1), 4)
         if swapram == 1:
             swapram = 0
-            status = "  :{} |  :{}% | :{} Gi | [/]:{} |  {}% | :{} | {} |  ".format(rx_speed, cpu, ram, root_dir, bat_perc, temp, now)
+            status = "  :{} |  :{}% | :{} Gi | [/]:{} |  {}% | :{} | {} | {} |  ".format(rx_speed, cpu, ram, root_dir, bat_perc, temp, now, now2)
         else:
             swapram = 1
-            status = "  :{} |  :{}% | :{} Mb | [h]:{} |  {}% | :{} | {} |  ".format(rx_speed, cpu, swap, home_dir, bat_perc, temp, now)
+            status = "  :{} |  :{}% | :{} Mb | [h]:{} |  {}% | :{} | {} | {} |  ".format(rx_speed, cpu, swap, home_dir, bat_perc, temp, now, now2)
         #logfile.write("{},{},{},{},{},{},{}\n".format(cpu, ram, swap, temp, rx_speed, bat_perc, datetime.datetime.now().strftime("%s")))
     except Exception:
         cpu = psutil.cpu_percent(interval=1)
         if swapram == 1:
             swapram = 0
-            status = "   :{}% | :{} Gi | [/]:{} | :{} | {} |  ".format(cpu, ram, root_dir, temp, now)
+            status = "   :{}% | :{} Gi | [/]:{} | :{} | {} | {} |  ".format(cpu, ram, root_dir, temp, now, now2)
         else:
             swapram = 1
-            status = "   :{}% | :{} Mb | [h]:{} | :{} | {} |  ".format(cpu, swap, home_dir, temp, now)
+            status = "   :{}% | :{} Mb | [h]:{} | :{} | {} | {} |  ".format(cpu, swap, home_dir, temp, now, now2)
         #logfile.write("{},{},{},0,0,{}\n".format(cpu, ram, swap, temp, rx_speed, bat_perc))
 
 

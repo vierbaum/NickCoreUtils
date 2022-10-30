@@ -18,7 +18,7 @@ void printFactors(int f, int e) {
         }
         printf("\\\\\n");
     }
-    printf("\\end{array}\n\\right]\n\\]\n\\\\\n\\\\\n");
+    printf("\\end{array}\n\\right]\n\\]\n\\\\\n");
 }
 
 void solve(int pos, int f, int e) {
@@ -41,20 +41,18 @@ void solve(int pos, int f, int e) {
 void calc(int pos, int f, int e) {
     for (int eq = pos + 1; eq < e; eq++) {
         if (factors[eq][pos] != 0) {
-            /*
-            double quo = factors[pos][pos] / factors[eq][pos];
-            for (int i = pos; i < f; i++) {
-
-                factors[eq][i] = factors[pos][i] - factors[eq][i] * quo;
-                //printf("POS %d I %d FAC %f, EQ %d I %d FAC %f, QUO %f\n", pos, i, factors[pos][i], eq, i, factors[eq][i], quo);
-            }
-            */
             double quo = factors[eq][pos] / factors[pos][pos];
             for (int i = pos; i < f; i++)
                 factors[eq][i] = factors[eq][i] - factors[pos][i] * quo;
 
         }
     }
+}
+
+void sort (int f, int e) {
+    for (int eq = 0; eq < e; eq++)
+        if (factors[eq][eq])
+    return;
 }
 
 int main() {
@@ -105,9 +103,8 @@ int main() {
             printFactors(f, e);
         }
 
-        for(int i = 0; i < e; i++) {
+        for(int i = 0; i < e; i++)
             printf("$x_{%d} \\approx %f$\\\\\n", i + 1, factors[i][f - 1]);
-    }
     }
     printf("\\end{document}\n");
     return 0;
