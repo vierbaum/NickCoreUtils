@@ -54,8 +54,9 @@ def getI(i):
     elif i == "TEMP":
         return(TEMP)
     elif i[:4] == "DATE":
-        ret = i[6:-1].split("\"")
-        if len(ret) == 2:
+        ret = i[6:-2].split("\"")
+        if len(ret) == 2 and ret[1] != "":
+            print(ret)
             return([DATE, ret[0], int(ret[1][1:])])
         else:
             return([DATE, ret[0]])
@@ -80,7 +81,7 @@ def get_bytes(t, iface='wlp3s0'):
             data = f.read();
             return int(data)
     except Exception:
-        return ""
+        return 0
 
 
 def getCpu():

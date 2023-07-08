@@ -3,6 +3,7 @@
 #
 # @version 0.1
 
+
 install:
 	chmod +x ./status.py
 	@$(CC) brenfordsLaw.c -o /usr/bin/brenfordsLaw
